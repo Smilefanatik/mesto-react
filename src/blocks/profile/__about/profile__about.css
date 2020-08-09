@@ -1,0 +1,22 @@
+.profile__about {
+  margin: 5px 0 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.125rem;
+  line-height: 1.22;
+  color: #ffffff
+}
+
+@media screen and (max-width: 1050px) {
+  .profile__about {
+    font-size: 14px;
+    line-height: 1.21;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .profile__about {
+    text-align: center;
+    margin-top: 0;
+  }
+}
