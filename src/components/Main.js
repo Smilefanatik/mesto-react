@@ -1,5 +1,6 @@
 import React from 'react';
 import { api } from '../utils/Api.js';
+import Card from './Card';
 
 function Main(props) {
 
@@ -9,13 +10,22 @@ function Main(props) {
 
   const [userAvatar, setUserAvatar] = React.useState("");
 
+  const [cards, setCards] = React.useState([]);
+
   React.useEffect(() => {
     api.getUserInfo()
-    .then((result) => {
-      setUserName(result.name)
-      setUserDescription(result.about)
-      setUserAvatar(result.avatar)
-    });
+      .then((result) => {
+        setUserName(result.name);
+        setUserDescription(result.about);
+        setUserAvatar(result.avatar);
+      });
+  })
+
+  React.useEffect(() => {
+    api.getCardsInfo()
+      .then((result) => {
+        setCards(result);
+      })
   })
 
   return (
@@ -39,7 +49,10 @@ function Main(props) {
 
       <section className="cards">
         <ul className="cards__list">
-
+          {cards.map((card) => (
+            <Card card={card}/>
+          )
+        )}
         </ul>
       </section>
 
