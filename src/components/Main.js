@@ -13,20 +13,25 @@ function Main(props) {
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
-    api.getUserInfo()
-      .then((result) => {
-        setUserName(result.name);
-        setUserDescription(result.about);
-        setUserAvatar(result.avatar);
-      });
-  })
+    Promise.all([api.getUserInfo(), api.getCardsInfo()])
+      .then((data) => {
+        //Ответ с сервера с информацией пользователя.
+        const userData = data[0];
 
-  React.useEffect(() => {
-    api.getCardsInfo()
-      .then((result) => {
-        setCards(result);
+        //Ответ с сервера с массивом карточек.
+        const initialCardsInfo = data[1];
+
+        //Вывести начальные данные пользователя.
+        setUserName(userData.name);
+        setUserDescription(userData.about);
+        setUserAvatar(userData.avatar);
+        //Вывести 30 карточек.
+        setCards(initialCardsInfo);
       })
-  })
+      .catch((error) => {
+        console.log(`Ошибка: ${error}`);
+      })
+  }, [])
 
   return (
     <main className="content">
@@ -50,13 +55,11 @@ function Main(props) {
       <section className="cards">
         <ul className="cards__list">
           {cards.map((card) => (
-            <Card card={card}/>
+            <Card card={card} key={card._id} onCardClick={props.onCardClick} />
           )
-        )}
+          )}
         </ul>
       </section>
-
-
     </main>
   )
 }

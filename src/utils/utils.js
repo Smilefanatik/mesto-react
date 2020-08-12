@@ -43,5 +43,3 @@ export const object = {
 //     link: photoMeadow
 //   }
 // ];
-
-

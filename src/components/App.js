@@ -6,35 +6,42 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 
 function App() {
-//Внутреннее состояние попапа редактирования аватара и его изменение.
+  //Внутреннее состояние попапа редактирования аватара и его изменение.
   const [isEditAvatarPopupOpen, setEditAvatarPopupState] = React.useState(false);
   function handleEditAvatarClick() {
     setEditAvatarPopupState(true);
   }
 
-//Внутреннее состояние попапа редактирования профиля и его изменение.
+  //Внутреннее состояние попапа редактирования профиля и его изменение.
   const [isEditProfilePopupOpen, setEditProfilePopupState] = React.useState(false);
   function handleEditProfileClick() {
     setEditProfilePopupState(true);
   }
 
-//Внутреннее состояние попапа создания карточки и его изменение.
+  //Внутреннее состояние попапа создания карточки и его изменение.
   const [isAddFormPopupOpen, setAddFormPopupState] = React.useState(false);
   function handleAddFormClick() {
     setAddFormPopupState(true);
   }
 
+  //Внутреннее состояние для отрисовки попапа карточки.
+  const [selectedCard, setCardState] = React.useState([false, {}]);
+  function handleCardClick(card) {
+    setCardState([true, card]);
+  }
 
+  //Закрытие попапов.
   function closeAllPopups() {
     setEditProfilePopupState(false);
     setEditAvatarPopupState(false);
     setAddFormPopupState(false);
+    setCardState([false, {}]);
   }
 
   return (
     <div className="page">
       <Header />
-      <Main onEditProfile={handleEditProfileClick} onAddForm={handleAddFormClick} onEditAvatar={handleEditAvatarClick} />
+      <Main onEditProfile={handleEditProfileClick} onAddForm={handleAddFormClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} />
 
       <PopupWithForm name="edit-profile" title="Редактировать профиль" buttonName="Сохранить" isOpen={isEditProfilePopupOpen ? "popup_opened" : ""} onClose={closeAllPopups}>
         <input id="name-input" name="name" type="text" className="popup__input popup__input_element_name"
@@ -59,9 +66,9 @@ function App() {
         <span id="link-input-error" className="popup__input-error"></span>
       </PopupWithForm>
 
-      <PopupWithForm name="confirm" title="Вы уверены?" buttonName="Да"/>
+      <PopupWithForm name="confirm" title="Вы уверены?" buttonName="Да" />
 
-      <ImagePopup />
+      <ImagePopup card={selectedCard[1]} isOpen={selectedCard[0] ? "popup_opened" : ""} onClose={closeAllPopups} />
       <Footer />
     </div>
   );

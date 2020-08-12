@@ -1,10 +1,14 @@
 import React from 'react';
 
 function Card(props) {
+  function handleImageClick() {
+    props.onCardClick(props.card);
+  }
+
   return (
-    <li key={props.card._id} className="card">
+    <li className="card">
       <button type="button" className="card__bin"></button>
-      <img className="card__photo" src={props.card.link} />
+      <img className="card__photo" alt={props.card.name} src={props.card.link} onClick={handleImageClick} />
       <div className="card__group">
         <h2 className="card__title">{props.card.name}</h2>
         <div className="card__like-group">
@@ -17,4 +21,3 @@ function Card(props) {
 }
 
 export default Card;
-
