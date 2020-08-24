@@ -25,7 +25,6 @@ function Main({ onEditProfile, onAddForm, onEditAvatar, onCardClick }) {
 
   //Обработчик клика по лайку.
   function handleCardLike(card) {
-
     //Проверка на наличие собственного лайка.
     const isLiked = card.likes.some(i => i._id === currentUserData._id);
 
@@ -35,6 +34,21 @@ function Main({ onEditProfile, onAddForm, onEditAvatar, onCardClick }) {
       .then((newCard) => {
         //Создать новый массив карточек, подставляя новые данные карточки.
         const newCards = cards.map((c) => c._id === card._id ? newCard : c);
+        // Обновляем состояние.
+        setCards(newCards);
+      });
+  }
+
+  //Обработчик клика по иконке удаления.
+  function handleCardDelete(card) {
+    api.deleteCard(card._id)
+      .then(() => {
+        //Создать новый массив карточек, подставляя новые данные карточки.
+        const newCards = cards.filter((c) => {
+          if (c._id !== card._id) {
+            return true;
+          }
+        });
         // Обновляем состояние.
         setCards(newCards);
       });
@@ -62,7 +76,7 @@ function Main({ onEditProfile, onAddForm, onEditAvatar, onCardClick }) {
       <section className="cards">
         <ul className="cards__list">
           {cards.map((card) => (
-            <Card card={card} key={card._id} onCardClick={onCardClick} onCardLike={handleCardLike} />
+            <Card card={card} key={card._id} onCardBin={handleCardDelete} onCardClick={onCardClick} onCardLike={handleCardLike} />
           )
           )}
         </ul>

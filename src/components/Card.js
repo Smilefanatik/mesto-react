@@ -1,7 +1,7 @@
 import React from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js'
 
-function Card({ card, onCardClick, onCardLike }) {
+function Card({ card, onCardBin, onCardClick, onCardLike }) {
   //Данные о текущем пользователе.
   const currentUserData = React.useContext(CurrentUserContext);
 
@@ -29,9 +29,13 @@ function Card({ card, onCardClick, onCardLike }) {
     onCardLike(card);
   }
 
+  function handleDeleteClick() {
+    onCardBin(card);
+  }
+
   return (
     <li className="card">
-      <button type="button" className={cardBinClassName} />
+      <button type="button" className={cardBinClassName} onClick={handleDeleteClick} />
       <img className="card__photo" alt={card.name} src={card.link} onClick={handleImageClick} />
       <div className="card__group">
         <h2 className="card__title">{card.name}</h2>
