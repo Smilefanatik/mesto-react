@@ -1,32 +1,21 @@
 import React from 'react';
-import { api } from '../utils/Api.js';
 import Card from './Card';
+import { api } from '../utils/Api.js';
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js'
 
 function Main({ onEditProfile, onAddForm, onEditAvatar, onCardClick }) {
 
-  const [userName, setUserName] = React.useState("");
+  //Данные о текущем пользователе.
+  const currentUserData = React.useContext(CurrentUserContext);
 
-  const [userDescription, setUserDescription] = React.useState("");
-
-  const [userAvatar, setUserAvatar] = React.useState("");
-
+  //Переменная состояния с данными карточек.
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getCardsInfo()])
+    api.getCardsInfo()
       .then((data) => {
-        //Ответ с сервера с информацией пользователя.
-        const userData = data[0];
-
-        //Ответ с сервера с массивом карточек.
-        const initialCardsInfo = data[1];
-
-        //Вывести начальные данные пользователя.
-        setUserName(userData.name);
-        setUserDescription(userData.about);
-        setUserAvatar(userData.avatar);
-        //Вывести 30 карточек.
-        setCards(initialCardsInfo);
+        //Обновить данные карточек.
+        setCards(data);
       })
       .catch((error) => {
         console.log(`Ошибка: ${error}`);
@@ -37,17 +26,17 @@ function Main({ onEditProfile, onAddForm, onEditAvatar, onCardClick }) {
     <main className="content">
       <section className="profile">
         <div className="profile__avatar-container">
-          <img className="profile__avatar" src={userAvatar} alt="аватар" />
+          <img className="profile__avatar" alt="аватар" src={currentUserData.avatar} />
           <div className="profile__overlay">
             <button type="button" onClick={onEditAvatar} className="profile__edit-avatar" />
           </div>
         </div>
         <div className="profile__info">
           <div className="profile__name-group">
-            <h1 className="profile__name" type="">{userName}</h1>
+            <h1 className="profile__name" type="">{currentUserData.name}</h1>
             <button type="button" onClick={onEditProfile} className="profile__edit-button" />
           </div>
-          <p className="profile__about">{userDescription}</p>
+          <p className="profile__about">{currentUserData.about}</p>
         </div>
         <button type="button" onClick={onAddForm} className="profile__add-button" />
       </section>
