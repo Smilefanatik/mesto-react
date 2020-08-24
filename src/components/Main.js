@@ -11,6 +11,7 @@ function Main({ onEditProfile, onAddForm, onEditAvatar, onCardClick }) {
   //Переменная состояния с данными карточек.
   const [cards, setCards] = React.useState([]);
 
+  //Получить начальный массив с тридцатью карточками.
   React.useEffect(() => {
     api.getCardsInfo()
       .then((data) => {
@@ -21,6 +22,23 @@ function Main({ onEditProfile, onAddForm, onEditAvatar, onCardClick }) {
         console.log(`Ошибка: ${error}`);
       })
   }, [])
+
+  //Обработчик клика по лайку.
+  function handleCardLike(card) {
+
+    //Проверка на наличие собственного лайка.
+    const isLiked = card.likes.some(i => i._id === currentUserData._id);
+
+    //Отправляем запрос на сервер в зависимости от наличия лайка.
+    const putOrDelete = () => isLiked ? api.deleteLike(card._id) : api.addLike(card._id);
+    putOrDelete()
+      .then((newCard) => {
+        //Создать новый массив карточек, подставляя новые данные карточки.
+        const newCards = cards.map((c) => c._id === card._id ? newCard : c);
+        // Обновляем состояние.
+        setCards(newCards);
+      });
+  }
 
   return (
     <main className="content">
@@ -44,7 +62,7 @@ function Main({ onEditProfile, onAddForm, onEditAvatar, onCardClick }) {
       <section className="cards">
         <ul className="cards__list">
           {cards.map((card) => (
-            <Card card={card} key={card._id} onCardClick={onCardClick} />
+            <Card card={card} key={card._id} onCardClick={onCardClick} onCardLike={handleCardLike} />
           )
           )}
         </ul>
