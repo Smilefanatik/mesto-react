@@ -24,10 +24,10 @@ function App() {
     setAddFormPopupState(true);
   }
 
-  //Внутреннее состояние для отрисовки попапа карточки.
-  const [selectedCard, setCardState] = React.useState([false, {}]);
+  //Внутреннее состояние для передачи данных карточки в попап с изображением.
+  const [selectedCard, setCardState] = React.useState(null);
   function handleCardClick(card) {
-    setCardState([true, card]);
+    setCardState(card);
   }
 
   //Закрытие попапов.
@@ -35,7 +35,7 @@ function App() {
     setEditProfilePopupState(false);
     setEditAvatarPopupState(false);
     setAddFormPopupState(false);
-    setCardState([false, {}]);
+    setCardState(null);
   }
 
   return (
@@ -68,10 +68,10 @@ function App() {
 
       <PopupWithForm name="confirm" title="Вы уверены?" buttonName="Да" />
 
-      <ImagePopup card={selectedCard[1]} isOpen={selectedCard[0] ? "popup_opened" : ""} onClose={closeAllPopups} />
+      <ImagePopup selectedCard={selectedCard} onClose={closeAllPopups} />
       <Footer />
     </div>
-  );
+  )
 }
 
 export default App;
