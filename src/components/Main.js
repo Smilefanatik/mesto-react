@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from './Card';
-import { api } from '../utils/Api.js';
-import { CurrentUserContext } from '../contexts/CurrentUserContext.js'
+import { api } from '../utils/Api';
+import { CurrentUserContext } from '../contexts/CurrentUserContext'
 
 function Main({ onEditProfile, onAddForm, onEditAvatar, onCardClick }) {
 
@@ -35,8 +35,8 @@ function Main({ onEditProfile, onAddForm, onEditAvatar, onCardClick }) {
         //Создать новый массив карточек, подставляя новые данные карточки.
         const newCards = cards.map((c) => c._id === card._id ? newCard : c);
         // Обновляем состояние.
-        setCards(newCards);
-      });
+        setCards(newCards)
+      })
   }
 
   //Обработчик клика по иконке удаления.
@@ -44,14 +44,14 @@ function Main({ onEditProfile, onAddForm, onEditAvatar, onCardClick }) {
     api.deleteCard(card._id)
       .then(() => {
         //Создать новый массив карточек, подставляя новые данные карточки.
-        const newCards = cards.filter((c) => {
+        const newCards = cards.filter(function(c) {
           if (c._id !== card._id) {
-            return true;
+            return true
           }
-        });
+        })
         // Обновляем состояние.
-        setCards(newCards);
-      });
+        setCards(newCards)
+      })
   }
 
   return (
