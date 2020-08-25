@@ -26,16 +26,30 @@ export default function AddFormPopup({ isOpen, isLoading, onAddCard, onClose }) 
 
   return (
     <PopupWithForm name="add-form"
-    title="Новое место"
-    buttonName={isLoading ? "Сохранение..." : "Создать"}
-    isOpen={isOpen ? "popup_opened" : ""}
-    onSubmit={handleSubmit}
-    onClose={onClose}>
-      <input id="place-input" value={name || ''} onChange={handleNameChange} name="name" type="text" className="popup__input popup__input__element_place"
-        placeholder="Название" minLength="1" maxLength="30" required />
+      title="Новое место"
+      buttonName={isLoading ? "Сохранение..." : "Создать"}
+      isOpen={isOpen ? "popup_opened" : ""}
+      onSubmit={handleSubmit}
+      onClose={onClose}>
+      <input id="place-input"
+        value={name || ''}
+        onChange={handleNameChange}
+        name="name"
+        type="text"
+        className="popup__input popup__input__element_place"
+        placeholder="Название"
+        minLength="1"
+        maxLength="30"
+        required />
       <span id="place-input-error" className="popup__input-error"></span>
-      <input id="link-input" value={link || ''} onChange={handleLinkChange} name="link" type="url" className="popup__input popup__input_element_link"
-        placeholder="Ссылка на картинку" required />
+      <input id="link-input"
+        value={link || ''}
+        onChange={handleLinkChange}
+        name="link"
+        type="url"
+        className="popup__input popup__input_element_link"
+        placeholder="Ссылка на картинку"
+        required />
       <span id="link-input-error" className="popup__input-error"></span>
     </PopupWithForm>
   )

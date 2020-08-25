@@ -204,7 +204,10 @@ function App() {
           onAddCard={handleAddPlaceSubmit}
           onClose={closeAllPopups} />
 
-        <ConfirmPopup isOpen={isConfirmPopupOpen} cardToDelete={cardToDelete} onDeleteCard={handleCardDelete} onClose={closeAllPopups} />
+        <ConfirmPopup isOpen={isConfirmPopupOpen}
+          cardToDelete={cardToDelete}
+          onDeleteCard={handleCardDelete}
+          onClose={closeAllPopups} />
 
         <ImagePopup selectedCard={selectedCard} onClose={closeAllPopups} />
         <Footer />
