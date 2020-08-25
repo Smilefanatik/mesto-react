@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/SmileFanatik/mesto-react/static/css/main.b2ca2d6c.chunk.css",
-    "main.js": "/SmileFanatik/mesto-react/static/js/main.b78fc3e6.chunk.js",
-    "main.js.map": "/SmileFanatik/mesto-react/static/js/main.b78fc3e6.chunk.js.map",
-    "runtime-main.js": "/SmileFanatik/mesto-react/static/js/runtime-main.b6afbc3d.js",
-    "runtime-main.js.map": "/SmileFanatik/mesto-react/static/js/runtime-main.b6afbc3d.js.map",
-    "static/js/2.dcab687c.chunk.js": "/SmileFanatik/mesto-react/static/js/2.dcab687c.chunk.js",
-    "static/js/2.dcab687c.chunk.js.map": "/SmileFanatik/mesto-react/static/js/2.dcab687c.chunk.js.map",
-    "index.html": "/SmileFanatik/mesto-react/index.html",
-    "precache-manifest.493cb5c0ee8602e33402265346c9482b.js": "/SmileFanatik/mesto-react/precache-manifest.493cb5c0ee8602e33402265346c9482b.js",
-    "service-worker.js": "/SmileFanatik/mesto-react/service-worker.js",
-    "static/css/main.b2ca2d6c.chunk.css.map": "/SmileFanatik/mesto-react/static/css/main.b2ca2d6c.chunk.css.map",
-    "static/js/2.dcab687c.chunk.js.LICENSE.txt": "/SmileFanatik/mesto-react/static/js/2.dcab687c.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/SmileFanatik/mesto-react/static/media/heart-icon_black.5bbb05f7.svg",
-    "static/media/logo.svg": "/SmileFanatik/mesto-react/static/media/logo.c6f11019.svg"
+    "main.css": "/mesto-react/static/css/main.d9330060.chunk.css",
+    "main.js": "/mesto-react/static/js/main.bfb6b4c2.chunk.js",
+    "main.js.map": "/mesto-react/static/js/main.bfb6b4c2.chunk.js.map",
+    "runtime-main.js": "/mesto-react/static/js/runtime-main.36fb0e45.js",
+    "runtime-main.js.map": "/mesto-react/static/js/runtime-main.36fb0e45.js.map",
+    "static/js/2.dcab687c.chunk.js": "/mesto-react/static/js/2.dcab687c.chunk.js",
+    "static/js/2.dcab687c.chunk.js.map": "/mesto-react/static/js/2.dcab687c.chunk.js.map",
+    "index.html": "/mesto-react/index.html",
+    "precache-manifest.d4af4de59bbecc57060112d0ebc750f6.js": "/mesto-react/precache-manifest.d4af4de59bbecc57060112d0ebc750f6.js",
+    "service-worker.js": "/mesto-react/service-worker.js",
+    "static/css/main.d9330060.chunk.css.map": "/mesto-react/static/css/main.d9330060.chunk.css.map",
+    "static/js/2.dcab687c.chunk.js.LICENSE.txt": "/mesto-react/static/js/2.dcab687c.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/mesto-react/static/media/heart-icon_black.5bbb05f7.svg",
+    "static/media/logo.svg": "/mesto-react/static/media/logo.c6f11019.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.b6afbc3d.js",
+    "static/js/runtime-main.36fb0e45.js",
     "static/js/2.dcab687c.chunk.js",
-    "static/css/main.b2ca2d6c.chunk.css",
-    "static/js/main.b78fc3e6.chunk.js"
+    "static/css/main.d9330060.chunk.css",
+    "static/js/main.bfb6b4c2.chunk.js"
   ]
 }
