@@ -20,7 +20,7 @@ class EditAvatarPopup extends React.Component {
     return (
       <PopupWithForm name="edit-avatar"
         title="Обновить аватар"
-        buttonName="Сохранить"
+        buttonName={this.props.isLoading ? "Сохранение..." : "Сохранить"}
         isOpen={this.props.isOpen ? "popup_opened" : ""}
         onSubmit={this.handleSubmit.bind(this)}
         onClose={this.props.onClose}>

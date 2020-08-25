@@ -1,7 +1,7 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
-export default function AddFormPopup({ isOpen, onAddCard, onClose }) {
+export default function AddFormPopup({ isOpen, isLoading, onAddCard, onClose }) {
 
   //Переменная состояния с названием карточки.
   const [name, setName] = React.useState('');
@@ -25,7 +25,12 @@ export default function AddFormPopup({ isOpen, onAddCard, onClose }) {
   }
 
   return (
-    <PopupWithForm name="add-form" title="Новое место" buttonName="Создать" isOpen={isOpen ? "popup_opened" : ""} onSubmit={handleSubmit} onClose={onClose}>
+    <PopupWithForm name="add-form"
+    title="Новое место"
+    buttonName={isLoading ? "Сохранение..." : "Создать"}
+    isOpen={isOpen ? "popup_opened" : ""}
+    onSubmit={handleSubmit}
+    onClose={onClose}>
       <input id="place-input" value={name || ''} onChange={handleNameChange} name="name" type="text" className="popup__input popup__input__element_place"
         placeholder="Название" minLength="1" maxLength="30" required />
       <span id="place-input-error" className="popup__input-error"></span>

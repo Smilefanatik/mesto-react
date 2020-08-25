@@ -113,6 +113,8 @@ function App() {
     setcardToDeleteState(card)
   }
 
+  //Внутреннее состояние индикатора загрузки запроса.
+  const [isLoading, setLoadingState] = React.useState(false);
 
   //Закрытие попапов.
   function closeAllPopups() {
@@ -126,6 +128,8 @@ function App() {
 
   //Обработчик сабмита формы редактирования профиля.
   function handleUpdateUser(userData) {
+    setLoadingState(true);
+
     api.changeProfileData(userData)
       .then((res) => {
         setCurrentUser(res)
@@ -135,11 +139,14 @@ function App() {
       })
       .finally(() => {
         closeAllPopups();
+        setLoadingState(false);
       });
   }
 
   //Обработчик сабмита формы редактирования аватара.
   function handleUpdateAvatar(userAvatar) {
+    setLoadingState(true);
+
     api.changeAvatar(userAvatar)
       .then((res) => {
         setCurrentUser(res)
@@ -149,11 +156,14 @@ function App() {
       })
       .finally(() => {
         closeAllPopups();
+        setLoadingState(false);
       });
   }
 
   //Обработчик сабмита формы добавления новой карточки.
   function handleAddPlaceSubmit(newCard) {
+    setLoadingState(true);
+
     api.addNewCard(newCard)
       .then((res) => {
         setCards([...cards, res]);
@@ -163,6 +173,7 @@ function App() {
       })
       .finally(() => {
         closeAllPopups();
+        setLoadingState(false);
       });
   }
 
@@ -179,14 +190,17 @@ function App() {
           onBinClick={handleBinClick} />
 
         <EditProfilePopup isOpen={isEditProfilePopupOpen}
+          isLoading={isLoading}
           onUpdateUser={handleUpdateUser}
           onClose={closeAllPopups} />
 
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen}
+          isLoading={isLoading}
           onUpdateAvatar={handleUpdateAvatar}
           onClose={closeAllPopups} />
 
         <AddFormPopup isOpen={isAddFormPopupOpen}
+          isLoading={isLoading}
           onAddCard={handleAddPlaceSubmit}
           onClose={closeAllPopups} />
 
