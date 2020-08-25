@@ -11,7 +11,13 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
   },
-
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SmileFanatik/mesto-react.git"
+  },
+  "author": "Vladimir Monk",
+  "license": "ISC",
+  "homepage": "https://github.com/SmileFanatik/mesto-react",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
