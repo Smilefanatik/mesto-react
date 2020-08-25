@@ -4,6 +4,7 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 import ImagePopup from './ImagePopup';
 import { api } from '../utils/Api.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js'
@@ -70,6 +71,20 @@ function App() {
     });
   }
 
+  //Обработчик сабмита формы редактирования аватара.
+  function handleUpdateAvatar(userAvatar) {
+    api.changeAvatar(userAvatar)
+    .then((res) => {
+      setCurrentUser(res)
+    })
+    .catch((error) => {
+      console.log(`Ошибка: ${error}`);
+    })
+    .finally(() => {
+      closeAllPopups();
+    });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -78,17 +93,14 @@ function App() {
 
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onUpdateUser={handleUpdateUser} onClose={closeAllPopups} />
 
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onUpdateAvatar={handleUpdateAvatar} onClose={closeAllPopups} />
+
         <PopupWithForm name="add-form" title="Новое место" buttonName="Создать" isOpen={isAddFormPopupOpen ? "popup_opened" : ""} onClose={closeAllPopups}>
           <input id="place-input" name="name" type="text" className="popup__input popup__input__element_place"
             placeholder="Название" minLength="1" maxLength="30" required />
           <span id="place-input-error" className="popup__input-error"></span>
           <input id="link-input" name="link" type="url" className="popup__input popup__input_element_link"
             placeholder="Ссылка на картинку" required />
-          <span id="link-input-error" className="popup__input-error"></span>
-        </PopupWithForm>
-
-        <PopupWithForm name="edit-avatar" title="Обновить аватар" buttonName="Сохранить" isOpen={isEditAvatarPopupOpen ? "popup_opened" : ""} onClose={closeAllPopups}>
-          <input id="link-input" name="avatar" type="url" className="popup__input popup__input_element_link" placeholder="Ссылка на картинку" required />
           <span id="link-input-error" className="popup__input-error"></span>
         </PopupWithForm>
 
