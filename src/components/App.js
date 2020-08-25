@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import PopupWithForm from './PopupWithForm';
+import ConfirmPopup from './ConfirmPopup';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddFormPopup from './AddFormPopup';
@@ -60,7 +60,7 @@ function App() {
       })
   }
 
-  //Обработчик клика по иконке удаления.
+  //Обработчик удаления карточки.
   function handleCardDelete(card) {
     api.deleteCard(card._id)
       .then(() => {
@@ -74,7 +74,19 @@ function App() {
       .catch((error) => {
         console.log(`Ошибка: ${error}`);
       })
+      .finally(() => {
+        closeAllPopups();
+      });
   }
+
+  //Внутреннее состояние для передачи данных карточки в попап с изображением.
+  const [selectedCard, setCardState] = React.useState(null);
+  function handleCardClick(card) {
+    setCardState(card);
+  }
+
+  //Внутреннее состояние для передачи данных карточки в попап с изображением.
+  const [cardToDelete, setcardToDeleteState] = React.useState(null);
 
   //Внутреннее состояние попапа редактирования аватара и его изменение.
   const [isEditAvatarPopupOpen, setEditAvatarPopupState] = React.useState(false);
@@ -94,18 +106,22 @@ function App() {
     setAddFormPopupState(true);
   }
 
-  //Внутреннее состояние для передачи данных карточки в попап с изображением.
-  const [selectedCard, setCardState] = React.useState(null);
-  function handleCardClick(card) {
-    setCardState(card);
+  //Внутреннее состояние попапа удаления карточки.
+  const [isConfirmPopupOpen, setConfirmPopupState] = React.useState(false);
+  function handleBinClick(card) {
+    setConfirmPopupState(true);
+    setcardToDeleteState(card)
   }
+
 
   //Закрытие попапов.
   function closeAllPopups() {
     setEditProfilePopupState(false);
     setEditAvatarPopupState(false);
     setAddFormPopupState(false);
+    setConfirmPopupState(false);
     setCardState(null);
+    setcardToDeleteState(null)
   }
 
   //Обработчик сабмита формы редактирования профиля.
@@ -154,15 +170,27 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header />
-        <Main cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} onEditProfile={handleEditProfileClick} onAddForm={handleAddFormClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} />
+        <Main cards={cards}
+          onCardLike={handleCardLike}
+          onEditProfile={handleEditProfileClick}
+          onAddForm={handleAddFormClick}
+          onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}
+          onBinClick={handleBinClick} />
 
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onUpdateUser={handleUpdateUser} onClose={closeAllPopups} />
+        <EditProfilePopup isOpen={isEditProfilePopupOpen}
+          onUpdateUser={handleUpdateUser}
+          onClose={closeAllPopups} />
 
-        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onUpdateAvatar={handleUpdateAvatar} onClose={closeAllPopups} />
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen}
+          onUpdateAvatar={handleUpdateAvatar}
+          onClose={closeAllPopups} />
 
-        <AddFormPopup isOpen={isAddFormPopupOpen} onAddCard={handleAddPlaceSubmit} onClose={closeAllPopups} />
+        <AddFormPopup isOpen={isAddFormPopupOpen}
+          onAddCard={handleAddPlaceSubmit}
+          onClose={closeAllPopups} />
 
-        <PopupWithForm name="confirm" title="Вы уверены?" buttonName="Да" />
+        <ConfirmPopup isOpen={isConfirmPopupOpen} cardToDelete={cardToDelete} onDeleteCard={handleCardDelete} onClose={closeAllPopups} />
 
         <ImagePopup selectedCard={selectedCard} onClose={closeAllPopups} />
         <Footer />

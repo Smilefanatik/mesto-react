@@ -36,12 +36,33 @@ export default function EditProfilePopup({ isOpen, onUpdateUser, onClose }) {
   }
 
   return (
-    <PopupWithForm name="edit-profile" title="Редактировать профиль" buttonName="Сохранить" isOpen={isOpen ? "popup_opened" : ""} onSubmit={handleSubmit} onClose={onClose}>
-      <input id="name-input" name="name" type="text" value={name || ''} onChange={handleNameChange} className="popup__input popup__input_element_name"
-        placeholder="Имя" minLength="2" maxLength="40" required />
+    <PopupWithForm name="edit-profile"
+      title="Редактировать профиль"
+      buttonName="Сохранить"
+      isOpen={isOpen ? "popup_opened" : ""}
+      onSubmit={handleSubmit}
+      onClose={onClose}>
+      <input id="name-input"
+        name="name"
+        type="text"
+        value={name || ''}
+        onChange={handleNameChange}
+        className="popup__input popup__input_element_name"
+        placeholder="Имя"
+        minLength="2"
+        maxLength="40"
+        required />
       <span id="name-input-error" className="popup__input-error"></span>
-      <input id="about-input" name="about" type="text" value={about || ''} onChange={handleInfoChange} className="popup__input popup__input_element_about"
-        placeholder="О себе" minLength="2" maxLength="200" required />
+      <input id="about-input"
+        name="about"
+        type="text"
+        value={about || ''}
+        onChange={handleInfoChange}
+        className="popup__input popup__input_element_about"
+        placeholder="О себе"
+        minLength="2"
+        maxLength="200"
+        required />
       <span id="about-input-error" className="popup__input-error"></span>
     </PopupWithForm>
   )

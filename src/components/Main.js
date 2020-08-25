@@ -2,7 +2,7 @@ import React from 'react';
 import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
 
-function Main({ cards, onCardLike, onCardDelete, onEditProfile, onAddForm, onEditAvatar, onCardClick }) {
+function Main({ cards, onCardLike, onEditProfile, onAddForm, onEditAvatar, onCardClick, onBinClick }) {
 
   //Данные о текущем пользователе.
   const currentUserData = React.useContext(CurrentUserContext);
@@ -29,7 +29,10 @@ function Main({ cards, onCardLike, onCardDelete, onEditProfile, onAddForm, onEdi
       <section className="cards">
         <ul className="cards__list">
           {cards.map((card) => (
-            <Card card={card} key={card._id} onCardBin={onCardDelete} onCardClick={onCardClick} onCardLike={onCardLike} />
+            <Card card={card} key={card._id}
+            onBinClick={onBinClick}
+            onCardClick={onCardClick}
+            onCardLike={onCardLike} />
           )
           )}
         </ul>
